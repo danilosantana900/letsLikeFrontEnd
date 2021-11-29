@@ -2,9 +2,8 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
 import { AccountService, AlertService } from '@app/_services';
-import { User } from '@app/_models';
+import { Alert, User } from '@app/_models';
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
@@ -16,7 +15,8 @@ export class RegisterComponent implements OnInit {
     constructor(
         private formBuilder: FormBuilder,
         private accountService: AccountService,
-        private alertService: AlertService
+        private alertService: AlertService,
+        private router: Router
     ) { }
 
     ngOnInit() {
@@ -24,7 +24,8 @@ export class RegisterComponent implements OnInit {
             nome: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', Validators.required],
-            senha: ['', Validators.required]
+            senha: ['', Validators.required],
+            confirmeSenha: ['', Validators.required]
         });       
     }
 
@@ -40,6 +41,12 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
+        if ((this.f.senha.value != '') &&
+            (this.f.confirmeSenha.value != '') && 
+            (this.f.senha.value != this.f.confirmeSenha.value)) {
+            console.log('Senha não são iguais!');            
+        }
+
         this.loading = true;
 
         this.user.nome = this.f.nome.value;
@@ -47,8 +54,10 @@ export class RegisterComponent implements OnInit {
         this.user.email = this.f.email.value;
         this.user.senha = this.f.senha.value;
         
-        this.accountService.register(this.user);
+        this.accountService.register(this.user);              
+    }
 
-        // se der certo retorna para tela de 
+    cancelar() {
+        this.router.navigate(['login']);
     }
 }
