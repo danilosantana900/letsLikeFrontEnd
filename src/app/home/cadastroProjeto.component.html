@@ -1,0 +1,55 @@
+<div class="card">
+    <h4 class="card-header">Cadastro de Projeto</h4>
+    <div class="card-body">
+        <form [formGroup]="form" (ngSubmit)="onSubmit()">
+            
+            <div class="form-group">
+                <label for="nome">Nome</label>
+                <input type="text" formControlName="nome" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.nome.errors }" />
+                <div *ngIf="submitted && f.nome.errors" class="invalid-feedback">
+                    <div *ngIf="f.nome.errors.required">Nome projeto é obrigatório</div>
+                </div>
+            </div>
+            
+            <!-- <div class="form-group">
+                <label for="linguagem">Linguagem</label>
+                <input type="text" formControlName="linguagem" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.linguagem.errors }" />
+                <div *ngIf="submitted && f.linguagem.errors" class="invalid-feedback">
+                    <div *ngIf="f.linguagem.errors.required">Linguagem é obrigatóio</div>
+                </div>
+            </div> -->
+            
+            <div class="form-group">
+                <label for="username">URL</label>
+                <input type="url" formControlName="url" class="form-control" placeholder="www.projeto.com" [ngClass]="{ 'is-invalid': submitted && f.url.errors }" />
+                <div *ngIf="submitted && f.url.errors" class="invalid-feedback">
+                    <div *ngIf="f.url.errors.required">URL é obrigatória</div>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label for="email">Imagem</label>
+                <input type="image" formControlName="imagem" class="form-control" />                
+            </div>
+            
+            <!-- <div class="form-group">
+                <label for="senha">Usuário</label>
+                <input type="text" formControlName="usuario" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.usuario.errors }" />
+                <div *ngIf="submitted && f.usuario.errors" class="invalid-feedback">
+                    <div *ngIf="f.usuario.errors.required">Usuário é obrigatóio</div>
+                </div>
+            </div> -->
+                        
+            <br>
+            <div class="form-group">
+                <button [disabled]="loading" class="btn btn-primary">
+                    <span *ngIf="loading" class="spinner-border spinner-border-sm mr-1"></span>
+                    Cadastrar
+                </button>
+                <button class="btn btn-danger" (click)="cancelar()">
+                    Cancelar
+                </button>
+            </div>         
+        </form>
+    </div>
+</div>

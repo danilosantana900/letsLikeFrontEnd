@@ -4,4 +4,5 @@
     username: string;
     email: string;
     senha: string;
+    confirmeSenha: string;
 }
