@@ -42,12 +42,6 @@ export class RegisterComponent implements OnInit {
             return;
         }
 
-        // if ((this.f.senha.value != '') &&
-        //     (this.f.confirmeSenha.value != '') && 
-        //     (this.f.senha.value != this.f.confirmeSenha.value)) {
-        //     console.log('Senha não são iguais!');            
-        // }
-
         this.loading = true;
 
         this.user.nome = this.f.nome.value;
@@ -55,11 +49,11 @@ export class RegisterComponent implements OnInit {
         this.user.email = this.f.email.value;
         this.user.senha = this.f.senha.value;
         
-        //this.accountService.register(this.user);
+        // this.accountService.register(this.user);
 
-        this.accountService.register(this.form.value)
+        this.accountService.register(this.user)
             .pipe(first())
-            .subdcribe({
+            .subscribe({
                 next: () => {
                     this.alertService.success('Usuário salvo com sucesso', { KeepAfterRouteChange: true });
                     this.router.navigate(['../login'], { relativeTo: this.route });

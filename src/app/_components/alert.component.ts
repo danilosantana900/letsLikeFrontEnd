@@ -36,5 +36,6 @@ export class AlertComponent implements OnInit, OnDestroy {
     }
 
     cssClass(alert: Alert) {
+        
     }
 }

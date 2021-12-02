@@ -11,12 +11,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { JwtInterceptor, ErrorInterceptor } from './_helpers';
 import { AppComponent } from './app.component';
 import { AlertComponent } from './_components';
-import { HomeComponent } from './home';
 import { MyMaterialModule } from './material';
 import { ChartsModule } from 'ng2-charts';
 import { PageComponent } from './page/page.component';
 import { ContentService } from './shared/services/content.service';
 import { FullpageDirective } from './shared/directives/fullpage.directive';
+import { ProjectComponent } from './project';
 
 @NgModule({
     imports: [
@@ -35,7 +35,7 @@ import { FullpageDirective } from './shared/directives/fullpage.directive';
     declarations: [
         AppComponent,
         AlertComponent,
-        HomeComponent,
+        ProjectComponent,
         PageComponent,
         FullpageDirective
     ],
