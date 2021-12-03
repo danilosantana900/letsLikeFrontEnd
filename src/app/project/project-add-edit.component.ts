@@ -3,11 +3,11 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AlertService, ProjectService } from '@app/_services';
 
-@Component({ templateUrl: 'add-edit.component.html' })
-export class AddEditComponent implements OnInit {
+@Component({ templateUrl: 'project-add-edit.component.html' })
+export class ProjectAddEditComponent implements OnInit {
     form: FormGroup;
-    loading = false;
     submitted = false;
+    loading = false;
 
     constructor(
         private formBuilder: FormBuilder,
@@ -15,9 +15,7 @@ export class AddEditComponent implements OnInit {
         private router: Router,
         private pojectService: ProjectService,
         private alertService: AlertService
-    ){}
-
-    get f() { return this.form.controls; }
+    ) { }
 
     ngOnInit() {
         this.form = this.formBuilder.group ({
@@ -27,11 +25,13 @@ export class AddEditComponent implements OnInit {
         })
     }
 
+    get f() { return this.form.controls; }
+
     onSubmit() {
 
     }
 
     cancelar() {
-
+        this.router.navigate(['projects']);
     }
 }

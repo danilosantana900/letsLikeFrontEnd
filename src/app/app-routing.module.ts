@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import { ProjectComponent } from './project';
+import { HomeComponent } from './home';
 import { AuthGuard } from './_helpers';
 
 const accountModule = () => import('./account/account.module').then(x => x.AccountModule);
@@ -9,10 +9,10 @@ const projectModule = () => import('./project/project.module').then(x => x.Proje
 
 
 const routes: Routes = [
-    { path: '', component: ProjectComponent, canActivate: [AuthGuard] },
+    { path: '', component: HomeComponent, canActivate: [AuthGuard] },
     { path: 'users', loadChildren: usersModule, canActivate: [AuthGuard] },
     { path: 'account', loadChildren: accountModule },
-    { path: 'project', loadChildren: projectModule },
+    { path: 'project', loadChildren: projectModule, canActivate: [AuthGuard] },
 
     // Redireciona para home
     { path: '**', redirectTo: '' }

@@ -1,11 +1,10 @@
 import { NgModule } from '@angular/core';
 import { ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-
 import { ProjectRoutingModule } from './project-routing.module';
 import { LayoutComponent } from './layout.component';
-import { ListComponent } from './list.component';
-import { AddEditComponent } from './add-edit.component';
+import { ProjectListComponent } from './project-list.component';
+import { ProjectAddEditComponent } from './project-add-edit.component';
 
 @NgModule({
     imports: [
@@ -15,8 +14,8 @@ import { AddEditComponent } from './add-edit.component';
     ],
     declarations: [
         LayoutComponent,
-        ListComponent,
-        AddEditComponent
+        ProjectListComponent,
+        ProjectAddEditComponent
     ]
 })
 export class ProjectModule { }

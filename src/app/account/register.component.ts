@@ -2,15 +2,14 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
+
 import { AccountService, AlertService } from '@app/_services';
-import { Alert, User } from '@app/_models';
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
     form: FormGroup;
     loading = false;
-    submitted = false;
-    user: User;
+    submitted = false;    
 
     constructor(
         private formBuilder: FormBuilder,
@@ -25,8 +24,8 @@ export class RegisterComponent implements OnInit {
             nome: ['', Validators.required],
             username: ['', Validators.required],
             email: ['', Validators.required],
-            senha: ['', Validators.required],
-            confirmeSenha: ['', Validators.required]
+            senha: ['', Validators.required, Validators.minLength(6)],
+            confirmeSenha: ['', Validators.required, Validators.minLength(6)]
         });       
     }
 
@@ -43,26 +42,18 @@ export class RegisterComponent implements OnInit {
         }
 
         this.loading = true;
-
-        this.user.nome = this.f.nome.value;
-        this.user.username = this.f.username.value;
-        this.user.email = this.f.email.value;
-        this.user.senha = this.f.senha.value;
-        
-        // this.accountService.register(this.user);
-
-        this.accountService.register(this.user)
+        this.accountService.register(this.form.value)
             .pipe(first())
             .subscribe({
                 next: () => {
-                    this.alertService.success('Usuário salvo com sucesso', { KeepAfterRouteChange: true });
+                    this.alertService.success('Usuário salvo com sucesso', { keepAfterRouteChange: true });
                     this.router.navigate(['../login'], { relativeTo: this.route });
                 },
                 error: error => {
                     this.alertService.error(error);
                     this.loading = false;
                 }
-            })
+            });
     }
 
     cancelar() {

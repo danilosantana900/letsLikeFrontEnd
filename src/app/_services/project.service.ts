@@ -2,16 +2,14 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
-import { map } from 'rxjs/operators';
 
-import { environment } from '@environments/environment';
 import { User } from '@app/_models';
-
-// Serviços que fazem a ponte com o back-end
 
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
+
     loginSucesso: boolean = false;
+
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 

@@ -2,10 +2,10 @@
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActivatedRoute, Router } from '@angular/router';
 import { AccountService, AlertService } from '@app/_services';
-import { first } from 'rxjs';
 
 @Component({ templateUrl: 'recoverPassword.component.html' })
 export class RecoverPasswordComponent implements OnInit {
+    
     form: FormGroup;
     loading = false;
     submitted = false;

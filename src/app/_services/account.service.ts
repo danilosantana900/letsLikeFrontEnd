@@ -7,14 +7,13 @@ import { map } from 'rxjs/operators';
 import { environment } from '@environments/environment';
 import { User } from '@app/_models';
 
-// Serviços que fazem a ponte com o back-end
-
 @Injectable({ providedIn: 'root' })
 export class AccountService {
     
     // url = 'https://localhost:44321/api/Login';
     
     loginSucesso: boolean = false;
+
     private userSubject: BehaviorSubject<User>;
     public user: Observable<User>;
 
@@ -37,22 +36,51 @@ export class AccountService {
         // return this.http.post<boolean>(this.url, { username, senha })
         //     .subscribe(resultado => console.log(resultado));
         
-        return this.http.post<boolean>(`${environment.apiUrl}/api/login`, { username, senha } )
-            .pipe(map(login => {
-                localStorage.setItem('login', JSON.stringify(login));
-                this.loginSucesso = true;
+        return this.http.post<User>(`${environment.apiUrl}/api/Login`, { username, senha } )
+            .pipe(map(user => {
+                localStorage.setItem('user', JSON.stringify(user));
+                this.userSubject.next(user);
+                return user;
             }));
-        if (this.loginSucesso) {
-            console.log('Usuário Logado');
-        }
     }
 
     logout() {
-        localStorage.removeItem('login');
+        localStorage.removeItem('user');
+        this.userSubject.next(null);
         this.router.navigate(['/account/login']);
     }
 
     register(user: User) {
-        return this.http.post(`${environment.apiUrl}/api/usuario`, user);
+        return this.http.post(`${environment.apiUrl}/users/register`, user);
+    }
+
+    getAll() {
+        return this.http.get<User[]>(`${environment.apiUrl}/users`);
+    }
+
+    getById(id: string) {
+        return this.http.get<User>(`${environment.apiUrl}/users/${id}`);
+    }
+
+    update(id, params) {
+        return this.http.put(`${environment.apiUrl}/users/${id}`, params)
+            .pipe(map(x => {
+                if (id == this.userValue.id) {
+                    const user = { ...this.userValue, ...params };
+                    localStorage.setItem('user', JSON.stringify(user));
+                    this.userSubject.next(user);
+                }
+                return x;
+            }));
+    }
+
+    delete(id: string) {
+        return this.http.delete(`${environment.apiUrl}/users/${id}`)
+            .pipe(map(x => {
+                if (id == this.userValue.id) {
+                    this.logout();
+                }
+                return x;
+            }));
     }
 }
