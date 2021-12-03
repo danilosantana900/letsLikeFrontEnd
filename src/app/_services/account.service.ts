@@ -9,9 +9,7 @@ import { User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class AccountService {
-    
-    // url = 'https://localhost:44321/api/Login';
-    
+           
     loginSucesso: boolean = false;
 
     private userSubject: BehaviorSubject<User>;
@@ -31,11 +29,7 @@ export class AccountService {
 
     login(username: string, senha: string) {
         console.log(`${environment.apiUrl}/api/login`);
-        console.log(username, senha);  
-        
-        // return this.http.post<boolean>(this.url, { username, senha })
-        //     .subscribe(resultado => console.log(resultado));
-        
+        console.log(username, senha);               
         return this.http.post<User>(`${environment.apiUrl}/api/Login`, { username, senha } )
             .pipe(map(user => {
                 localStorage.setItem('user', JSON.stringify(user));

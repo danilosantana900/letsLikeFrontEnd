@@ -11,6 +11,7 @@
 /node_modules
 /.angular
 /.vscode
+.cache/
 
 # profiling files
 chrome-profiler-events*.json
