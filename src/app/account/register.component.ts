@@ -2,34 +2,32 @@
 import { Router, ActivatedRoute } from '@angular/router';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { first } from 'rxjs/operators';
-
 import { AccountService, AlertService } from '@app/_services';
 
 @Component({ templateUrl: 'register.component.html' })
 export class RegisterComponent implements OnInit {
     form: FormGroup;
     loading = false;
-    submitted = false;    
+    submitted = false;
 
     constructor(
         private formBuilder: FormBuilder,
-        private accountService: AccountService,
-        private alertService: AlertService,
+        private route: ActivatedRoute,
         private router: Router,
-        private route: ActivatedRoute
+        private accountService: AccountService,
+        private alertService: AlertService
     ) { }
 
     ngOnInit() {
         this.form = this.formBuilder.group({
             nome: ['', Validators.required],
-            username: ['', Validators.required],
             email: ['', Validators.required],
-            senha: ['', Validators.required, Validators.minLength(6)],
-            confirmeSenha: ['', Validators.required, Validators.minLength(6)]
-        });       
+            username: ['', Validators.required],
+            confirmarSenha: ['', Validators.required],
+            senha: ['', [Validators.required, Validators.minLength(6)]]
+        });
     }
 
-    // getter para facilitar o acesso aos campos do formulário
     get f() { return this.form.controls; }
 
     onSubmit() {

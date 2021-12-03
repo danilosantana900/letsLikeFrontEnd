@@ -28,8 +28,8 @@ export class AccountService {
     }
 
     login(username: string, senha: string) {
-        console.log(`${environment.apiUrl}/api/login`);
-        console.log(username, senha);               
+        // console.log(`${environment.apiUrl}/api/login`);
+        // console.log(username, senha);               
         return this.http.post<User>(`${environment.apiUrl}/api/Login`, { username, senha } )
             .pipe(map(user => {
                 localStorage.setItem('user', JSON.stringify(user));
