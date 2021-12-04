@@ -2,26 +2,38 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { HttpClient } from '@angular/common/http';
 import { BehaviorSubject, Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 
-import { User } from '@app/_models';
+import { environment } from '@environments/environment';
+import { Projeto } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
-
-    loginSucesso: boolean = false;
-
-    private userSubject: BehaviorSubject<User>;
-    public user: Observable<User>;
+    
+    private projetoSubject: BehaviorSubject<Projeto>;
+    public projeto: Observable<Projeto>;
 
     constructor(
         private router: Router,
         private http: HttpClient
     ) {
-        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
-        this.user = this.userSubject.asObservable();
+        this.projetoSubject = new BehaviorSubject<Projeto>(JSON.parse(localStorage.getItem('projeto')));
+        this.projeto = this.projetoSubject.asObservable();
     }
 
-    public get userValue(): User {
-        return this.userSubject.value;
+    public get projetoValue(): Projeto {
+        return this.projetoSubject.value;
+    }
+
+    getAll() {
+        return this.http.get<Projeto[]>(`${environment.apiUrl}/api/Projeto`);
+    }
+
+    delete(id: string) {
+        return this.http.delete(`${environment.apiUrl}/api/projeto/${id}`)
+            .pipe(map(x => {
+                if (id == this.projetoValue.id) { }
+                return x;
+            }));
     }
 }

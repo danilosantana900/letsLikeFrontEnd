@@ -1,6 +1,42 @@
-﻿<div class="p-4">
+﻿<!-- <div class="p-4">
     <div class="container">
         <h1>Olá Aqui ficará sua listagem de Projetos</h1>
         <a routerLink="add" class="btn btn-sm btn-success mb-2">Cadastrar Projeto</a>
+    </div>
+</div> -->
+
+<div class="p-4">
+    <div class="container">
+        <h1>Projetos</h1>
+        <a routerLink="add" class="btn btn-sm btn-success mb-2">Adicionar Projeto</a>
+        <table class="table table-striped">
+            <thead>
+                <tr>
+                    <th style="width: 30%">Nome</th>
+                    <th style="width: 30%">Imagem</th>
+                    <th style="width: 30%">URL</th>
+                    <th style="width: 10%"></th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="projeto user of projetos">
+                    <td>{{ projeto.nome }}</td>
+                    <td>{{ projeto.imagem }}</td>
+                    <td>{{ projeto.url }}</td>            
+                    <td style="white-space: nowrap">
+                        <a routerLink="edit/{{ projeto.id }}" class="btn btn-sm btn-primary mr-1">Editar</a>
+                        <button (click)="deleteProjeto(projeto.id)" class="btn btn-sm btn-danger btn-delete-projeto" [disabled]="projeto.isDeleting">
+                            <span *ngIf="projeto.isDeleting" class="spinner-border spinner-border-sm"></span>
+                            <span *ngIf="!projeto.isDeleting">Delete</span>
+                        </button>
+                    </td>
+                </tr>
+                <tr *ngIf="!projetos">
+                    <td colspan="4" class="text-center">
+                        <span class="spinner-border spinner-border-lg align-center"></span>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
     </div>
 </div>
