@@ -45,7 +45,7 @@ export class AccountService {
     }
 
     register(user: User) {
-        return this.http.post(`${environment.apiUrl}/api/usuario`, user);
+        return this.http.post(`${environment.apiUrl}/api/Usuario`, user);
     }
 
     getAll() {
