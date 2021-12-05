@@ -12,19 +12,19 @@
                 </tr>
             </thead>
             <tbody>
-                <tr *ngFor="projeto user of projetos">
-                    <td>{{ projeto.nome }}</td>
-                    <td>{{ projeto.imagem }}</td>
-                    <td>{{ projeto.url }}</td>            
+                <tr *ngFor="project user of projects">
+                    <td>{{ project.nome }}</td>                    
+                    <td>{{ project.url }}</td>
+                    <td>{{ project.imagem }}</td>           
                     <td style="white-space: nowrap">
-                        <a routerLink="edit/{{ projeto.id }}" class="btn btn-sm btn-primary mr-1">Editar</a>
-                        <button (click)="deleteProjeto(projeto.id)" class="btn btn-sm btn-danger btn-delete-projeto" [disabled]="projeto.isDeleting">
-                            <span *ngIf="projeto.isDeleting" class="spinner-border spinner-border-sm"></span>
-                            <span *ngIf="!projeto.isDeleting">Delete</span>
+                        <a routerLink="edit/{{ project.id }}" class="btn btn-sm btn-primary mr-1">Editar</a>
+                        <button (click)="deleteProject(project.id)" class="btn btn-sm btn-danger btn-delete-project" [disabled]="project.isDeleting">
+                            <span *ngIf="project.isDeleting" class="spinner-border spinner-border-sm"></span>
+                            <span *ngIf="!project.isDeleting">Delete</span>
                         </button>
                     </td>
                 </tr>
-                <tr *ngIf="!projetos">
+                <tr *ngIf="!projects">
                     <td colspan="4" class="text-center">
                         <span class="spinner-border spinner-border-lg align-center"></span>
                     </td>

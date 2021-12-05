@@ -5,7 +5,7 @@ import { BehaviorSubject, Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 
 import { environment } from '@environments/environment';
-import { Projeto } from '@app/_models';
+import { Projeto, User } from '@app/_models';
 
 @Injectable({ providedIn: 'root' })
 export class ProjectService {
@@ -13,16 +13,25 @@ export class ProjectService {
     private projetoSubject: BehaviorSubject<Projeto>;
     public projeto: Observable<Projeto>;
 
+    private userSubject: BehaviorSubject<User>;
+    public user: Observable<User>;
+
     constructor(
         private router: Router,
         private http: HttpClient
     ) {
         this.projetoSubject = new BehaviorSubject<Projeto>(JSON.parse(localStorage.getItem('projeto')));
         this.projeto = this.projetoSubject.asObservable();
+        this.userSubject = new BehaviorSubject<User>(JSON.parse(localStorage.getItem('user')));
+        this.user = this.userSubject.asObservable();
     }
 
     public get projetoValue(): Projeto {
         return this.projetoSubject.value;
+    }
+    
+    public get userValue(): User {
+        return this.userSubject.value;
     }
 
     getAll() {
@@ -35,6 +44,7 @@ export class ProjectService {
     }
 
     register(projeto: Projeto) {
+        // projeto.idUsuarioCadastro = parseInt(this.userValue.id);
         return this.http.post(`${environment.apiUrl}/api/Projeto`, projeto);
     }
 
