@@ -1,11 +1,9 @@
 ﻿import { Component, OnInit } from '@angular/core';
-import { User } from '@app/_models';
 import { ProjectService } from '@app/_services';
 import { first } from 'rxjs/operators';
 
 @Component({ templateUrl: 'project-list.component.html' })
-export class ProjectListComponent implements OnInit {
-    // user: User;
+export class ProjectListComponent implements OnInit {    
     projetos = null;
 
     constructor(private projectService: ProjectService) { }
@@ -16,7 +14,7 @@ export class ProjectListComponent implements OnInit {
             .subscribe(projetos => this.projetos = projetos);
     }
 
-    deleteProjeto(id: string) {
+    deleteProjeto(id: number) {
         const projeto = this.projetos.find(x => x.id === id);
         projeto.isDeleting = true;
         this.projectService.delete(id)

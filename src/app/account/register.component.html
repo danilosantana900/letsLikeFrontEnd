@@ -38,9 +38,10 @@
             
             <div class="form-group">
                 <label for="confirmarSenha">Confirmar Senha</label>
-                <input type="password" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmarSenha.errors }" />
+                <input type="password" formControlName="confirmarSenha" class="form-control" [ngClass]="{ 'is-invalid': submitted && f.confirmarSenha.errors }" />
                 <div *ngIf="submitted && f.confirmarSenha.errors" class="invalid-feedback">
                     <div *ngIf="f.confirmarSenha.errors.required">Confirmar Senha é obrigatório</div>
+                    <div *ngIf="f.senha.errors.minlength">A confirmação de senha deve ter pelo menos 6 caracteres</div>
                 </div>
             </div>
             

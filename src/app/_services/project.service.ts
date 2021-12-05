@@ -26,13 +26,14 @@ export class ProjectService {
     }
 
     getAll() {
-        return this.http.get<Projeto[]>(`${environment.apiUrl}/api/Projeto`);
+        console.log(`${environment.apiUrl}/api/Projeto/`);
+        return this.http.get<Projeto[]>(`${environment.apiUrl}/api/Projeto/`);
     }
 
-    delete(id: string) {
+    delete(id: number) {
         return this.http.delete(`${environment.apiUrl}/api/projeto/${id}`)
             .pipe(map(x => {
-                if (id == this.projetoValue.id) { }
+                if (id === this.projetoValue.id) { }
                 return x;
             }));
     }
