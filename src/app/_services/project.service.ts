@@ -35,7 +35,6 @@ export class ProjectService {
     }
 
     getAll() {
-        console.log(`${environment.apiUrl}/api/Projeto/`);
         return this.http.get<Projeto[]>(`${environment.apiUrl}/api/Projeto`);
     }
 

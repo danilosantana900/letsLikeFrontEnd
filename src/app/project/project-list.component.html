@@ -20,7 +20,7 @@
                         <a routerLink="edit/{{ project.id }}" class="btn btn-sm btn-primary mr-1">Editar</a>
                         <button (click)="deleteProject(project.id)" class="btn btn-sm btn-danger btn-delete-project" [disabled]="project.isDeleting">
                             <span *ngIf="project.isDeleting" class="spinner-border spinner-border-sm"></span>
-                            <span *ngIf="!project.isDeleting">Delete</span>
+                            <span *ngIf="!project.isDeleting">Excluir</span>
                         </button>
                     </td>
                 </tr>

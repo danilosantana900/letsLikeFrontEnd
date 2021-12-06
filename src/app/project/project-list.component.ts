@@ -5,13 +5,14 @@ import { first } from 'rxjs/operators';
 @Component({ templateUrl: 'project-list.component.html' })
 export class ProjectListComponent implements OnInit {
     projects: any;
-
-    constructor(private accountService: AccountService,
-      private projectService: ProjectService) {}
+    
+    constructor(
+        private projectService: ProjectService
+    ) {}
 
     ngOnInit() {
         this.projectService.getAll()
         .pipe(first())
-        .subscribe(projects => this.projects = projects);
+        .subscribe(x => this.projects = x);
     }
 }
